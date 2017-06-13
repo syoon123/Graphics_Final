@@ -9,7 +9,7 @@ RED = 0
 GREEN = 1
 BLUE = 2
 
-DEFAULT_COLOR = [255, 255, 255]
+DEFAULT_COLOR = [0, 0, 0]
 
 def new_screen( width = XRES, height = YRES ):
     screen = []
@@ -31,6 +31,9 @@ def plot( screen, zbuffer, color, x, y, z):
     newy = YRES - 1 - y
     if ( x >= 0 and x < XRES and newy >= 0 and newy < YRES ):
         screen[newy][x] = color[:]
+        if z >= zbuffer[newy][x]:
+            screen[newy][x] = color[:]
+            zbuffer[newy][x] = z
 
 def clear_screen( screen ):
     for y in range( len(screen) ):
